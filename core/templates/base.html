@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %}Hipogram{% endblock %}</title>
+    <!---------- CSS ----------->
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}"/>
+    {% block css %}{% endblock %}
+    <!-------------------------->
+  </head>
+  <body>
+    {% block body %}
+      {% include "navbar.html" %}
+    <br/>
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-2">
+          <div class="content-section">
+            <h3># Trends</h3>
+            <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action">A first link item</a>
+            <a href="#" class="list-group-item list-group-item-action">A second link item</a>
+            <a href="#" class="list-group-item list-group-item-action">A third link item</a>
+            <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
+            <a href="#" class="list-group-item list-group-item-action">A fifth link item</a>
+          </div>
+            </p>
+          </div>
+        </div>
+          <div class="col-md-8">
+          {% block content %}{% endblock %}
+          </div>
+      </div>
+    </main>
+
+    {% if is_paginated %}
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-end">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link"  href="?page={{ page_obj.previous_page_number }}" >Previous</a></li>
+        {% else %}
+        <li class="page-item disabled">
+        </li>
+        {% endif %}
+
+        {% if movies.number|add:'-3' > 1 %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.number|add:'-3' }}">&hellip;</a></li>
+        {% endif %}
+
+    {% for i in paginator.page_range %}
+        {% if page_obj.number == i %}
+        <li class="page-item active" aria-current="page">
+            <span class="page-link">
+                {{ i }}
+                <span class="sr-only">(current)</span>
+            </span>
+        </li>
+        {% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'3' %}
+            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+    {% endfor %}
+        {% if movies.paginator.num_pages > page_obj.number|add:'3' %}
+           <li class="page-item">
+               <a class="page-link" href="?page={{ page_obj.number|add:'3' }}">&hellip;</a>
+           </li>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+        <li><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+        {% else %}
+        <li class="disabled"></li>
+        {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+
+    {% endblock body %}
+    <!------- JavaScript ------->
+    <script src="{% static "js/jquery.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    {% block js %}{% endblock %}
+    <!-------------------------->
+  </body>
+</html>
