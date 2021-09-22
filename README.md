@@ -1,9 +1,9 @@
-# HipolabsChallange
+# HipolabsChallenge    
 
-This project made for Hipo Intership Program on Backend.
-This challange is about making some add-ons to a program called **Hipogram** which is an Instagram clone. 
+This project made for Hipo Internship Program on Backend.
+This challenge is about making some add-ons to a program called **Hipogram** which is an Instagram clone. 
 
-The challage has 6 tasks.
+The challenge has 6 tasks.
 * **Task 1:** Create post creation page
 * **Task 2:** Add pagination to the list page
 * **Task 3:** Add tags to posts
